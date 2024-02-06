@@ -4,7 +4,7 @@ class RestaurantModel {
   final String description;
   final String pictureid;
   final String city;
-  final int rating;
+  final double rating;
   final Menu menus;
 
   const RestaurantModel({
@@ -23,7 +23,7 @@ class RestaurantModel {
         id: json["id"],
         name: json["name"],
         pictureid: json["pictureId"],
-        rating: json["rating"],
+        rating: json["rating"].toDouble(),
         description: json["description"],
         menus: Menu.fromJson(
           json["menus"],
@@ -32,8 +32,8 @@ class RestaurantModel {
 }
 
 class Menu {
-  final List<Food> foods;
-  final List<Drink> drinks;
+  final List<dynamic> drinks;
+  final List<dynamic> foods;
 
   const Menu({
     required this.drinks,
@@ -41,8 +41,12 @@ class Menu {
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) => Menu(
-        drinks: json["drinks"],
-        foods: json["foods"],
+        drinks: json['drinks'] != null
+            ? List<dynamic>.from(json['drinks'].map((x) => x))
+            : [],
+        foods: json['foods'] != null
+            ? List<dynamic>.from(json['foods'].map((x) => x))
+            : [],
       );
 }
 
