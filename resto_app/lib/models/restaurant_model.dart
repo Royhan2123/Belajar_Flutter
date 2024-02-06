@@ -32,22 +32,26 @@ class RestaurantModel {
 }
 
 class Menu {
-  final List<dynamic> drinks;
-  final List<dynamic> foods;
+  final List<Food> foods;
+  final List<Drink> drinks;
 
   const Menu({
     required this.drinks,
     required this.foods,
   });
 
-  factory Menu.fromJson(Map<String, dynamic> json) => Menu(
-        drinks: json['drinks'] != null
-            ? List<dynamic>.from(json['drinks'].map((x) => x))
-            : [],
-        foods: json['foods'] != null
-            ? List<dynamic>.from(json['foods'].map((x) => x))
-            : [],
-      );
+  factory Menu.fromJson(Map<String, dynamic> json) {
+    // Akses daftar makanan dari objek JSON
+    final List<dynamic> foodsJson = json['foods'];
+
+    return Menu(
+      drinks: (json['drinks'] as List<dynamic>)
+          .map((drinkJson) => Drink.fromJson(drinkJson))
+          .toList(),
+      // Iterasi melalui daftar makanan JSON dan mengonversi menjadi objek Food
+      foods: foodsJson.map((foodJson) => Food.fromJson(foodJson)).toList(),
+    );
+  }
 }
 
 class Drink {

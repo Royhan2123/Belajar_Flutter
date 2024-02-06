@@ -90,6 +90,87 @@ class DetailRestaurantScreen extends StatelessWidget {
                     Text(
                       restaurantModel.description,
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Foods",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          for (Food food in restaurantModel.menus.foods)
+                            Container(
+                              margin: const EdgeInsets.only(
+                                right: 10,
+                              ),
+                              width: 170,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color:
+                                      const Color.fromARGB(255, 216, 216, 216)),
+                              child: Center(
+                                child: Text(
+                                  food.name,
+                                  style: const TextStyle(color: Colors.black),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Drinks",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          for (Drink drink in restaurantModel.menus.drinks)
+                            Container(
+                              margin: const EdgeInsets.only(
+                                right: 10,
+                              ),
+                              width: 170,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color:
+                                      const Color.fromARGB(255, 216, 216, 216)),
+                              child: Center(
+                                child: Text(
+                                  drink.name,
+                                  style: const TextStyle(color: Colors.black),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
                   ],
                 ),
               )
