@@ -11,57 +11,90 @@ class DetailRestaurantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        title: const Text(
-          "Detail Restaurant Screen",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-          ),
-        ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 20,
-        ),
-        children: [
-          Container(
-            width: double.maxFinite,
-            height: 500,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                  restaurantModel.pictureid.toString(),
-                ),
-                fit: BoxFit.cover,
-              ),
+        appBar: AppBar(
+          centerTitle: true,
+          elevation: 0,
+          title: const Text(
+            "Detail Restaurant Screen",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
             ),
           ),
-          const SizedBox(
-            height: 20,
+        ),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Container(
+                width: double.maxFinite,
+                height: 300,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      restaurantModel.pictureid.toString(),
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      restaurantModel.name,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.mode_of_travel_sharp,
+                          size: 20,
+                          color: Colors.black,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          restaurantModel.city,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "Descripsi",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      restaurantModel.description,
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-          Text(restaurantModel.name),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(restaurantModel.city),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            "Descripsi",
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            restaurantModel.description,
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }
