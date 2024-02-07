@@ -8,6 +8,9 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  final TextEditingController txtFormSearch = TextEditingController(text: "");
+  bool colorSearch = false;
+  bool colorText = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +24,69 @@ class _SearchScreenState extends State<SearchScreen> {
             fontSize: 18,
           ),
         ),
-        leading: const Icon(
-          Icons.search,
-          color: Colors.black,
-          size: 20,
-        ),
       ),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          isiBody(),
+        ],
+      ),
+    );
+  }
+
+  Widget isiBody() {
+    return Column(
+      children: [
+        Focus(
+          onFocusChange: (value) {
+            setState(() {
+              colorSearch = value;
+            });
+          },
+          child: TextFormField(
+            controller: txtFormSearch,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+            ),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              contentPadding: const EdgeInsets.all(10),
+              hintText: "search your product here ...",
+              hintStyle: const TextStyle(
+                color: Colors.grey,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.grey,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 65, 1, 84),
+                  width: 1.5,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              suffixIcon: Icon(
+                Icons.search,
+                color: colorSearch
+                    ? const Color.fromARGB(255, 65, 1, 84)
+                    : Colors.grey,
+              ),
+            ),
+            keyboardType: TextInputType.text,
+          ),
+        ),
+      ],
     );
   }
 }
