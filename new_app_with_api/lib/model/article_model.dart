@@ -7,13 +7,13 @@ class ArticlesResult {
  
  final String status;
  final int totalResults;
- final List<Article> articles;
+ final List<ArticleModel> articles;
  
  factory ArticlesResult.fromJson(Map<String, dynamic> json) => ArticlesResult(
       status: json["status"],
       totalResults: json["totalResults"],
-      articles: List<Article>.from((json["articles"] as List)
-          .map((x) => Article.fromJson(x))
+      articles: List<ArticleModel>.from((json["articles"] as List)
+          .map((x) => ArticleModel.fromJson(x))
           .where((article) =>
               article.author != null &&
               article.urlToImage != null &&
@@ -22,8 +22,8 @@ class ArticlesResult {
     );
 }
  
-class Article {
- Article({
+class ArticleModel {
+ ArticleModel({
    required this.author,
    required this.title,
    required this.description,
@@ -41,7 +41,7 @@ class Article {
  DateTime? publishedAt;
  String? content;
  
- factory Article.fromJson(Map<String, dynamic> json) => Article(
+ factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
        author: json["author"],
        title: json["title"],
        description: json["description"],
