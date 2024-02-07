@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class RestaurantScreen extends StatefulWidget {
-  const RestaurantScreen({Key? key}) : super(key: key);
+  const RestaurantScreen({super.key});
 
   @override
-  _RestaurantScreenState createState() => _RestaurantScreenState();
+  State<RestaurantScreen> createState() => _RestaurantScreenState();
 }
 
 class _RestaurantScreenState extends State<RestaurantScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,6 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
           size: 20,
         ),
       ),
-      body: 
     );
   }
 }

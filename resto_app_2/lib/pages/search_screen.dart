@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-class RestaurantScreen extends StatefulWidget {
-  const RestaurantScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
   @override
-  _RestaurantScreenState createState() => _RestaurantScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _RestaurantScreenState extends State<RestaurantScreen> {
-  
+class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,19 +15,18 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
         centerTitle: true,
         elevation: 0,
         title: const Text(
-          "Restaurant Screen",
+          "Search Screen",
           style: TextStyle(
             color: Colors.black,
             fontSize: 18,
           ),
         ),
         leading: const Icon(
-          Icons.restaurant_menu_rounded,
+          Icons.search,
           color: Colors.black,
           size: 20,
         ),
       ),
-      body: 
     );
   }
 }
