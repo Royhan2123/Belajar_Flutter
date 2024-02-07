@@ -12,8 +12,10 @@ class RestaurantServices {
     );
 
     if (response.statusCode == 200) {
+      List<dynamic> restaurantJsonList =
+          jsonDecode(response.body)["restaurants"];
       return List<RestaurantModel>.from(
-        jsonDecode(response.body)["message"].map(
+        restaurantJsonList.map(
           (restaurantModel) => RestaurantModel.fromJson(restaurantModel),
         ),
       );

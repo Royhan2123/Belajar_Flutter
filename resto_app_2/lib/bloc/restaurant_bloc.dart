@@ -21,6 +21,7 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
             RestaurantSucces(restaurant),
           );
         } catch (e) {
+          print(e);
           emit(
             RestaurantFailed(
               e.toString(),
