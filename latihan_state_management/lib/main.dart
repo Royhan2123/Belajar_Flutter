@@ -20,9 +20,15 @@ class MainActivity extends StatelessWidget {
   }
 }
 
-class NewActivity extends StatelessWidget {
+class NewActivity extends StatefulWidget {
   const NewActivity({super.key});
 
+  @override
+  State<NewActivity> createState() => _NewActivityState();
+}
+
+class _NewActivityState extends State<NewActivity> {
+  final List<String> doneModuleList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +41,9 @@ class NewActivity extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const DoneModuleList(),
+                  builder: (context) => DoneModuleList(
+                    doneModuleList: doneModuleList,
+                  ),
                 ),
               );
             },
@@ -47,14 +55,25 @@ class NewActivity extends StatelessWidget {
           ),
         ],
       ),
-      body: const ModuleList(),
+      body: ModuleList(
+        doneModuleList: doneModuleList,
+      ),
     );
   }
 }
 
-class ModuleList extends StatelessWidget {
-  const ModuleList({super.key});
+class ModuleList extends StatefulWidget {
+  final List<String> doneModuleList;
+  const ModuleList({
+    super.key,
+    required this.doneModuleList,
+  });
 
+  @override
+  State<ModuleList> createState() => _ModuleListState();
+}
+
+class _ModuleListState extends State<ModuleList> {
   final List<String> _moduleList = const [
     'Modul 1 - Pengenalan Dart',
     'Modul 2 - Program Dart Pertamamu',
@@ -71,37 +90,70 @@ class ModuleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: _moduleList.length,
-        itemBuilder: (context, index) {
-          return ModuleTile(
-            moduleName: _moduleList[index],
-          );
-        },);
+      itemCount: _moduleList.length,
+      itemBuilder: (context, index) {
+        return ModuleTile(
+          moduleName: _moduleList[index],
+          isDone: widget.doneModuleList.contains(
+            _moduleList[index],
+          ),
+          onClick: () {
+            setState(() {
+              widget.doneModuleList.add(_moduleList[index]);
+            });
+          },
+        );
+      },
+    );
   }
 }
 
 class ModuleTile extends StatelessWidget {
   final String moduleName;
+  final bool isDone;
+  final Function() onClick;
 
-  const ModuleTile({Key? key, required this.moduleName}) : super(key: key);
+  const ModuleTile({
+    Key? key,
+    required this.moduleName,
+    required this.isDone,
+    required this.onClick,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(moduleName),
-      trailing: ElevatedButton(
-        onPressed: () {},
-        child: const Text('Done'),
-      ),
+      trailing: isDone
+          ? const Icon(Icons.done)
+          : ElevatedButton(
+              onPressed: onClick,
+              child: const Text("Done"),
+            ),
     );
   }
 }
 
 class DoneModuleList extends StatelessWidget {
-  const DoneModuleList({super.key});
+  final List<String> doneModuleList;
+  const DoneModuleList({super.key, required this.doneModuleList});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Done Module List"),
+      ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(
+              doneModuleList[index],
+            ),
+          );
+        },
+        itemCount: doneModuleList.length,
+      ),
+    );
   }
 }
