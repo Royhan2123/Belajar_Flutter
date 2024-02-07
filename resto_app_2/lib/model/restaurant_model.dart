@@ -21,6 +21,6 @@ class RestaurantModel {
     name: json["name"],
     description: json["description"],
     rating: json["rating"].toDouble(),
-    pictureId: json["pictureId"],
+    pictureId: json["pictureId"].toString(),
   );
 }

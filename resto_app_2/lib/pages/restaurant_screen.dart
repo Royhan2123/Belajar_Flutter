@@ -40,9 +40,6 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
         ),
       ),
       body: Container(
-        margin: const EdgeInsets.only(
-          top: 50,
-        ),
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 20,
@@ -68,6 +65,9 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   color: Colors.grey,
                   fontSize: 16,
                 ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               BlocProvider(
                 create: (context) => RestaurantBloc()
