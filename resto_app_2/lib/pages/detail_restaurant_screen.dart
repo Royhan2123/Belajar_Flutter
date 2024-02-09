@@ -5,8 +5,8 @@ class DetailRestaurantScreen extends StatelessWidget {
   final RestaurantModel restaurantModel;
   const DetailRestaurantScreen({
     required this.restaurantModel,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +14,7 @@ class DetailRestaurantScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           "Detail Restaurant Screen",
@@ -32,9 +33,11 @@ class DetailRestaurantScreen extends StatelessWidget {
               height: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image:
-                        NetworkImage("$urlImage/${restaurantModel.pictureId!}"),
-                    fit: BoxFit.cover),
+                  image: NetworkImage(
+                    "$urlImage/${restaurantModel.pictureId ?? ''}",
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(
@@ -48,7 +51,7 @@ class DetailRestaurantScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    restaurantModel.name.toString(),
+                    restaurantModel.name ?? 'No Name',
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -69,7 +72,7 @@ class DetailRestaurantScreen extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        restaurantModel.city.toString(),
+                        restaurantModel.city ?? 'Unknown City',
                       ),
                     ],
                   ),
@@ -77,20 +80,21 @@ class DetailRestaurantScreen extends StatelessWidget {
                     height: 10,
                   ),
                   const Text(
-                    "Descripsi",
+                    "Description",
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Text(
-                    restaurantModel.description.toString(),
+                    restaurantModel.description ?? 'No Description',
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                 ],
               ),

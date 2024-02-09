@@ -10,7 +10,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController txtFormSearch = TextEditingController(text: "");
   bool colorSearch = false;
-  bool colorText = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -79,8 +78,8 @@ class _SearchScreenState extends State<SearchScreen> {
               suffixIcon: Icon(
                 Icons.search,
                 color: colorSearch
-                    ? const Color.fromARGB(255, 65, 1, 84)
-                    : Colors.grey,
+                    ? const Color.fromARGB(255, 110, 15, 136)
+                    : Colors.black,
               ),
             ),
             keyboardType: TextInputType.text,

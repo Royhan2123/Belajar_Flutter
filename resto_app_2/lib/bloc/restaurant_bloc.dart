@@ -15,12 +15,13 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
             RestaurantLoading(),
           );
 
-          final restaurant = await RestaurantServices().getRestaurant();
+          final restaurant = await RestaurantService().getRestaurantList();
 
           emit(
             RestaurantSucces(restaurant),
           );
         } catch (e) {
+          print(e);
           emit(
             RestaurantFailed(
               e.toString(),

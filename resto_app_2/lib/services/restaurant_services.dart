@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:resto_app_2/model/restaurant_model.dart';
 
-class RestaurantServices {
-  final baseUrl = "https://restaurant-api.dicoding.dev";
 
-  Future<List<RestaurantModel>> getRestaurant() async {
+ class RestaurantService {
+  final String baseUrl = "https://restaurant-api.dicoding.dev";
+
+  Future<List<RestaurantModel>> getRestaurantList() async {
     final response = await http.get(
       Uri.parse("$baseUrl/list"),
     );

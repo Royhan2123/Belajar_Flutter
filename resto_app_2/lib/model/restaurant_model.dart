@@ -4,50 +4,98 @@ class RestaurantModel {
   final String? description;
   final String? pictureId;
   final String? city;
+  final String? address;
   final double? rating;
-  final List<Category>? categories;
-  final Menus? menus;
-  final List<CustomerReview>? customerReviews;
+  final Category? category;
+  final Menu? menu;
+  final CustomerReview? customerReview;
 
-  const RestaurantModel({
-    this.city,
-    this.id,
-    this.name,
-    this.description,
-    this.pictureId,
-    this.rating,
-    this.categories,
-    this.menus,
-    this.customerReviews,
+  RestaurantModel({
+     this.id,
+     this.name,
+     this.description,
+     this.pictureId,
+     this.city,
+     this.address,
+     this.rating,
+    this.category,
+    this.menu,
+    this.customerReview,
   });
 
-  factory RestaurantModel.fromJson(Map<dynamic, dynamic> json) => RestaurantModel(
-        city: json["city"],
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        rating: json["rating"].toDouble(),
-        pictureId: json["pictureId"].toString(),
-        categories: json.containsKey('categories')
-            ? List<Category>.from(json['categories'].map((x) => Category.fromJson(x)))
-            : null,
-        menus: json.containsKey('menus') ? Menus.fromJson(json['menus']) : null,
-        customerReviews: json.containsKey('customerReviews')
-            ? List<CustomerReview>.from(json['customerReviews'].map((x) => CustomerReview.fromJson(x)))
-            : null,
-      );
+  factory RestaurantModel.fromJson(Map<String, dynamic> json) {
+    return RestaurantModel(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      pictureId: json['pictureId'],
+      city: json['city'],
+      address: json['address'],
+      rating: json['rating'].toDouble(),
+      category: json["categories"] == null
+          ? null
+          : Category.fromJson(
+              json["categories"],
+            ),
+      menu: json["menus"] == null
+          ? null
+          : Menu.fromJson(
+              json["menus"],
+            ),
+      customerReview: json["customerReviews"] == null
+          ? null
+          : CustomerReview.fromJson(
+              json["customerReviews"],
+            ),
+    );
+  }
 }
 
 class Category {
   final String name;
 
-  const Category({
-    required this.name,
-  });
+  Category({required this.name});
 
-  factory Category.fromJson(Map<dynamic, dynamic> json) => Category(
-        name: json["name"],
-      );
+  factory Category.fromJson(dynamic json) {
+    return Category(
+      name: json['name'],
+    );
+  }
+}
+
+class Menu {
+  final List<Food> foods;
+  final List<Drink> drinks;
+
+  Menu({required this.foods, required this.drinks});
+
+  factory Menu.fromJson(Map<String,dynamic>json) {
+    return Menu(foods: json["foods"], drinks: json["drinks"],);
+  }
+}
+
+class Food {
+  final String name;
+
+  Food({required this.name});
+
+  factory Food.fromJson(dynamic json) {
+    return Food(
+      name: json['name'],
+    );
+  }
+}
+
+class Drink {
+  final String name;
+
+  Drink({required this.name});
+
+  factory Drink.fromJson(dynamic json) {
+    return Drink(
+      name: json['name'],
+    );
+  }
 }
 
 class CustomerReview {
@@ -55,41 +103,17 @@ class CustomerReview {
   final String review;
   final String date;
 
-  const CustomerReview({
+  CustomerReview({
     required this.name,
     required this.review,
     required this.date,
   });
 
-  factory CustomerReview.fromJson(Map<dynamic, dynamic> json) => CustomerReview(
-        name: json["name"],
-        review: json["review"],
-        date: json["date"],
-      );
-}
-class Menus {
-  final List<MenuItem> foods;
-  final List<MenuItem> drinks;
-
-  const Menus({
-    required this.foods,
-    required this.drinks,
-  });
-
-  factory Menus.fromJson(Map<dynamic, dynamic> json) => Menus(
-        foods: List<MenuItem>.from(json["foods"].map((x) => MenuItem.fromJson(x))),
-        drinks: List<MenuItem>.from(json["drinks"].map((x) => MenuItem.fromJson(x))),
-      );
-}
-
-class MenuItem {
-  final String name;
-
-  const MenuItem({
-    required this.name,
-  });
-
-  factory MenuItem.fromJson(Map<dynamic, dynamic> json) => MenuItem(
-        name: json["name"],
-      );
+  factory CustomerReview.fromJson(dynamic json) {
+    return CustomerReview(
+      name: json['name'],
+      review: json['review'],
+      date: json['date'],
+    );
+  }
 }

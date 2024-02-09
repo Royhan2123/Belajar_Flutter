@@ -33,6 +33,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             fontSize: 18,
           ),
         ),
+        backgroundColor: Colors.white,
         leading: const Icon(
           Icons.restaurant_menu_rounded,
           color: Colors.black,
