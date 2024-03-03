@@ -38,14 +38,18 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final name = ref.watch(nameProvider);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Latihan Riverpod + Provider"),
       ),
       body: Center(
-        child: Text(name),
+        child: Consumer(
+          builder: (context, ref, child) {
+            final name = ref.watch(nameProvider);
+            return Text(name);
+          },
+        ),
       ),
     );
   }
