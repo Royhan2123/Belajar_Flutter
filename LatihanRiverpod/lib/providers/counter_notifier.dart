@@ -6,4 +6,7 @@ part 'counter_notifier.g.dart';
 class CounterNotifier extends _$CounterNotifier {
   @override
   int build() => 0;
+
+  increment() => state++;
+  decrement() => state--;
 }
