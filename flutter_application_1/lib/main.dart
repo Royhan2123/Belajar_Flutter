@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/article_detail_page.dart';
 import 'package:flutter_application_1/model/article_model.dart';
 
 void main() {
@@ -22,6 +23,9 @@ class MainActivity extends StatelessWidget {
       initialRoute: NewListPage.routeName,
       routes: {
         NewListPage.routeName: (context) => const NewListPage(),
+        ArticleDetailPage.routName: (context) => ArticleDetailPage(
+            articleModel:
+                ModalRoute.of(context)?.settings.arguments as ArticleModel),
       },
     );
   }
@@ -55,6 +59,10 @@ class NewListPage extends StatelessWidget {
 
   Widget _buildArticleItem(BuildContext context, ArticleModel articleModel) {
     return ListTile(
+      onTap: () {
+        Navigator.pushNamed(context, ArticleDetailPage.routName,
+            arguments: articleModel);
+      },
       contentPadding:
           const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       leading: Image.network(

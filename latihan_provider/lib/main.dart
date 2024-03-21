@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:latihan_provider/done_modoule_provider.dart';
 import 'package:latihan_provider/provider_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MainActivity());
@@ -10,9 +12,12 @@ class MainActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProviderPage(),
+    return ChangeNotifierProvider(
+      create: (context) => DoneModuleProvider(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: ProviderPage(),
+      ),
     );
   }
 }
