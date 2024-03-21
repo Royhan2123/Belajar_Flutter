@@ -6,7 +6,7 @@ part of 'counter_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$counterNotifierHash() => r'8bd43637a26a2ea4b70102cc8aa51ca16abaadd7';
+String _$counterNotifierHash() => r'fc8aeb49703eda96e1d6826e8b7b19369b697bf3';
 
 /// See also [CounterNotifier].
 @ProviderFor(CounterNotifier)
