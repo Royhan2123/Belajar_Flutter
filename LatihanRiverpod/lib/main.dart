@@ -4,17 +4,12 @@ import 'package:latihan_riverpod/page/counter_page.dart';
 
 void main() {
   runApp(
+    // provider scope digunakan untuk menyambungkan bagian pada penggunakan provider ke dalam void main
     const ProviderScope(
       child: MainActivity(),
     ),
   );
 }
-
-final nameProvider = Provider<String>(
-  (ref) {
-    return "Hello Royhan";
-  },
-);
 
 class MainActivity extends StatelessWidget {
   const MainActivity({super.key});
@@ -33,4 +28,3 @@ class MainActivity extends StatelessWidget {
     );
   }
 }
-
