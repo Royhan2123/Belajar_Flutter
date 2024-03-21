@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latihan_riverpod/page/counter_page.dart';
 
 void main() {
   runApp(
@@ -28,30 +29,8 @@ class MainActivity extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(),
+      home: const CounterPage(),
     );
   }
 }
 
-class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Latihan Riverpod + Provider"),
-      ),
-      body: Center(
-        child: Consumer(
-          builder: (context, ref, child) {
-            final name = ref.watch(nameProvider);
-            return Text(name);
-          },
-        ),
-      ),
-    );
-  }
-  
-}
