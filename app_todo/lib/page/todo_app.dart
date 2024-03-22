@@ -41,7 +41,11 @@ class _TodoAppState extends ConsumerState<TodoApp> {
                   todo.body,
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    wiRef.watch(todoNotifierProvider.notifier).remove(
+                          todo.id,
+                        );
+                  },
                   icon: const Icon(
                     Icons.delete,
                   ),
