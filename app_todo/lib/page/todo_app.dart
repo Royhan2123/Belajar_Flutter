@@ -3,11 +3,18 @@ import 'package:app_todo/providers/todo_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TodoApp extends ConsumerWidget {
+class TodoApp extends ConsumerStatefulWidget {
   const TodoApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<TodoApp> createState() => _TodoAppState();
+}
+
+class _TodoAppState extends ConsumerState<TodoApp> {
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       body: Consumer(
         builder: (context, wiRef, child) {
@@ -18,17 +25,25 @@ class TodoApp extends ConsumerWidget {
               Todo todo = todos[index];
               return ListTile(
                 leading: IconButton.filledTonal(
-                  onPressed: () {},
+                  onPressed: () {
+                    buildUpdate(
+                      todo,
+                    );
+                  },
                   icon: const Icon(
                     Icons.edit,
                   ),
                 ),
-                title: Text(todo.title),
-                subtitle: Text(todo.body),
+                title: Text(
+                  todo.title,
+                ),
+                subtitle: Text(
+                  todo.body,
+                ),
                 trailing: IconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    Icons.edit,
+                    Icons.delete,
                   ),
                 ),
               );
@@ -37,7 +52,7 @@ class TodoApp extends ConsumerWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => buildAdd(context),
+        onPressed: () => buildAdd(),
         child: const Icon(
           Icons.add,
         ),
@@ -45,9 +60,9 @@ class TodoApp extends ConsumerWidget {
     );
   }
 
-  buildAdd(BuildContext context) {
+  buildAdd() {
     final edtTitle = TextEditingController();
-    final edtBody = TextEditingController();  
+    final edtBody = TextEditingController();
 
     showDialog(
       context: context,
@@ -72,7 +87,64 @@ class TodoApp extends ConsumerWidget {
             height: 20,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(
+                context,
+              );
+
+              ref
+                  .read(todoNotifierProvider.notifier)
+                  .add(edtTitle.text, edtBody.text);
+            },
+            child: const Text(
+              "Save",
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  buildUpdate(Todo oldTodo) {
+    final edtTitle = TextEditingController();
+    final edtBody = TextEditingController();
+
+    edtTitle.text = oldTodo.title;
+    edtBody.text = oldTodo.body;
+
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: const Text(
+          "Update Todo",
+        ),
+        contentPadding: const EdgeInsets.all(
+          20,
+        ),
+        children: [
+          TextField(
+            controller: edtTitle,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextField(
+            controller: edtBody,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(
+                context,
+              );
+              Todo todoUpdated = oldTodo.copyWith(
+                title: edtTitle.text,
+                body: edtBody.text,
+              );
+              ref.read(todoNotifierProvider.notifier).update(todoUpdated);
+            },
             child: const Text(
               "Save",
             ),
