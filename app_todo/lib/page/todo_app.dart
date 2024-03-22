@@ -36,6 +36,49 @@ class TodoApp extends ConsumerWidget {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => buildAdd(context),
+        child: const Icon(
+          Icons.add,
+        ),
+      ),
+    );
+  }
+
+  buildAdd(BuildContext context) {
+    final edtTitle = TextEditingController();
+    final edtBody = TextEditingController();  
+
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: const Text(
+          "Add Todo",
+        ),
+        contentPadding: const EdgeInsets.all(
+          20,
+        ),
+        children: [
+          TextField(
+            controller: edtTitle,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextField(
+            controller: edtBody,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "Save",
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
