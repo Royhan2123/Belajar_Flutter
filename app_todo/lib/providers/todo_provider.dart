@@ -17,4 +17,15 @@ class TodoNotifier extends _$TodoNotifier {
     );
     state = [...state, newTodo];
   }
+
+  update(Todo newTodo) {
+    int index = state.indexWhere((element) => element.id == newTodo.id);
+    state[index] = newTodo;
+    state = [...state];
+  }
+
+  remove(String id) {
+    state.removeWhere((element) => element.id == id);
+    state = [...state];
+  }
 }
