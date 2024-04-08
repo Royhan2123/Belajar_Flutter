@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_flutter_firebase/page/home_scree.dart';
-import 'package:new_flutter_firebase/page/register_screen.dart';
+import 'package:new_flutter_firebase/page/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController txtName = TextEditingController(text: "");
   final TextEditingController txtEmail = TextEditingController(text: "");
   final TextEditingController txtPassword = TextEditingController(text: "");
 
   bool isValidate() {
-    if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
+    if (txtEmail.text.isEmpty ||
+        txtPassword.text.isEmpty ||
+        txtName.text.isEmpty) {
       return true;
     } else {
       return false;
@@ -65,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Center(
             child: Text(
-              "Login Your Account",
+              "Register Your Account",
               style: GoogleFonts.poppins(
                 color: Colors.black,
                 fontSize: 15,
@@ -74,6 +76,34 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(
             height: 80,
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  15,
+                ),
+              ),
+              contentPadding: const EdgeInsets.all(
+                12,
+              ),
+              hintText: "enter your name",
+              hintStyle: const TextStyle(
+                color: Colors.grey,
+                fontSize: 15,
+              ),
+            ),
+            controller: txtName,
+            cursorColor: Colors.black,
+            enabled: true,
+            keyboardType: TextInputType.name,
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(
+            height: 25,
           ),
           TextFormField(
             decoration: InputDecoration(
@@ -163,17 +193,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       backgroundColor: Colors.red,
                     ),
                   );
-                } else {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                      (route) => false);
-                }
+                } else {}
               },
               child: const Text(
-                "Login",
+                "Create Account",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 13,
@@ -182,13 +205,13 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "dont't have account ?",
+                "Already have account ?",
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 14,
@@ -199,12 +222,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RegisterScreen(),
+                      builder: (context) => const LoginScreen(),
                     ),
                   );
                 },
                 child: const Text(
-                  "Sign Up",
+                  "Sign In",
                   style: TextStyle(
                     color: Colors.blue,
                     fontSize: 14,
@@ -212,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ],
-          ),
+          )
         ],
       ),
     );
