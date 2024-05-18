@@ -10,12 +10,15 @@ const question = [
       'Functions',
     ],
   ),
-  QuizQuestion('How are Flutter UIs built?', [
-    'By combining widgets in code',
-    'By combining widgets in a visual editor',
-    'By defining widgets in config files',
-    'By using XCode for iOS and Android Studio for Android',
-  ]),
+  QuizQuestion(
+    'How are Flutter UIs built?',
+    [
+      'By combining widgets in code',
+      'By combining widgets in a visual editor',
+      'By defining widgets in config files',
+      'By using XCode for iOS and Android Studio for Android',
+    ],
+  ),
   QuizQuestion(
     'What\'s the purpose of a StatefulWidget?',
     [
