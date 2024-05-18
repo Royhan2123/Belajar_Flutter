@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/question.dart';
 import 'package:quiz_app/question_screen.dart';
+import 'package:quiz_app/theme/font.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({
     super.key,
   });
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  final List<String> selectAnswer = [];
+
+  void chooseAnswer(
+    String answer,
+  ) {
+    selectAnswer.add(answer);
+
+    if (selectAnswer.length == question.length) {
+      setState(() {
+        const SplashScreen();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,15 +88,16 @@ class SplashScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const QuestionScreen(),
+                    builder: (context) => QuestionScreen(
+                      onSelectAnswer: chooseAnswer,
+                    ),
                   ),
                 );
               },
-              label: const Text(
+              label: Text(
                 "Start Quiz",
-                style: TextStyle(
+                style: whiteStyle.copyWith(
                   fontSize: 16,
-                  color: Colors.white,
                 ),
               ),
               icon: const Icon(

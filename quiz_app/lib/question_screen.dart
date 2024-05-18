@@ -1,26 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/question.dart';
+import 'package:quiz_app/theme/font.dart';
 import 'package:quiz_app/widget/answer_button.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key});
+  const QuestionScreen({
+    super.key,
+    required this.onSelectAnswer,
+  });
+
+  final void Function(
+    String answer,
+  ) onSelectAnswer;
 
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
+  var currentQuestionIndex = 0;
+
+  void answerQuestion(
+    String selectedAnswer,
+  ) {
+    widget.onSelectAnswer(
+      selectedAnswer,
+    );
+    setState(
+      () {
+        if (currentQuestionIndex < question.length - 1) {
+          currentQuestionIndex++;
+        } else {
+          Navigator.pop(
+            context,
+          );
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = question[0];
+    final currentQuestion = question[currentQuestionIndex];
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(
-          255,
-          61,
-          10,
-          150,
-        ),
+        backgroundColor: const Color.fromARGB(255, 25, 1, 66),
         body: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
@@ -32,9 +56,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
               children: [
                 Text(
                   currentQuestion.text,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: whiteStyle.copyWith(
                     fontSize: 17,
+                    color: const Color.fromARGB(255, 174, 127, 255),
+                    fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -50,10 +75,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
                  *  List<int> allNumber = [...a, ...b];
                  *  print(allNumber) => output: [1,2,3,4,5,6];
                  */
-                ...currentQuestion.answer.map(
+                ...currentQuestion.getShuffledAnswers().map(
                   (answer) {
                     return AnswerButton(
-                      onClick: () {},
+                      onClick: () {
+                        answerQuestion(
+                          answer,
+                        );
+                      },
                       title: answer,
                     );
                   },
