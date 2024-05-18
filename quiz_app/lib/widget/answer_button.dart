@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class AnswerButton extends StatelessWidget {
-  String title;
-  Function() onClick;
-  AnswerButton({
+  final String title;
+  final Function() onClick;
+  const AnswerButton({
     super.key,
     required this.onClick,
     required this.title,
@@ -14,13 +13,18 @@ class AnswerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue,
-        minimumSize: const Size(
-          200,
-          40,
+        backgroundColor: const Color.fromARGB(255, 33, 1, 99),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 40,
+          vertical: 10,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            15,
+          ),
         ),
       ),
-      onPressed: onClick,
+      onPressed: () {},
       child: Text(
         title,
         style: const TextStyle(
