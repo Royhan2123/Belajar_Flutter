@@ -1,4 +1,6 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, avoid_print
+
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -11,7 +13,9 @@ class MainActivity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: DicePage());
+      debugShowCheckedModeBanner: false,
+      home: DicePage(),
+    );
   }
 }
 
@@ -23,23 +27,27 @@ class DicePage extends StatefulWidget {
 }
 
 class _DicePageState extends State<DicePage> {
-  var activeDiceImage = "assets/dice-2.png";
+  var currentDiceRoll = 2;
 
   void rollDice() {
     setState(() {
-      activeDiceImage = "assets/dice-4.png";
+      currentDiceRoll = Random().nextInt(6) + 1;
+      print(
+        "perubahan $currentDiceRoll",
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 31, 3, 79),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              activeDiceImage,
+              "assets/dice-$currentDiceRoll.png",
               width: 200,
               fit: BoxFit.cover,
             ),
@@ -49,13 +57,15 @@ class _DicePageState extends State<DicePage> {
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(
-                  color: Colors.white,
                   fontSize: 15,
                 ),
               ),
               onPressed: rollDice,
               child: const Text(
                 "Roll Dice",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
